@@ -1,7 +1,13 @@
 package org.board.demo.service;
 
-import org.board.demo.domain.Board;
+import java.util.List;
+
+import org.board.demo.domain.BoardVO;
 
 public interface BoardService {
-    public Board read(Integer bno);
+    public int register(BoardVO board);      // Create
+    public BoardVO read(Integer bno);     // Read
+    public int modify(BoardVO board);     // Update
+    public int remove(Integer bno);     // Delete
+    public List<BoardVO> getBoardList();  // List
 }

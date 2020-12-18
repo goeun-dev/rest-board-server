@@ -5,8 +5,27 @@
 
   <mapper namespace="org.board.demo.mapper.BoardMapper">
 
-    <select id="selectOne" resultType="org.board.demo.domain.Board">
+    <select id="select" resultType="org.board.demo.domain.BoardVO">
         select * from board where bno = #{bno}
     </select>
+
+    <select id="selectList" resultType="org.board.demo.domain.BoardVO">
+        select * from board
+    </select>
+
+    <update id="update">
+        update board set 
+        title = #{title}, content = #{content}
+        where bno = #{bno} 
+    </update>
+
+    <delete id="delete">
+        delete from board where bno = #{bno}
+    </delete>
+
+    <insert id="insert">
+        insert into board (title, content, writer)
+        value (#{title}, #{content}, #{writer})
+    </insert>
 
   </mapper>

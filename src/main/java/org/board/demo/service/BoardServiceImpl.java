@@ -1,6 +1,8 @@
 package org.board.demo.service;
 
-import org.board.demo.domain.Board;
+import java.util.List;
+
+import org.board.demo.domain.BoardVO;
 import org.board.demo.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,28 @@ public class BoardServiceImpl implements BoardService {
     BoardMapper boardMapper;
 
     @Override
-    public Board read(Integer bno) {
-        return boardMapper.selectOne(bno);
+    public BoardVO read(Integer bno) {
+        return boardMapper.select(bno);
+    }
+
+    @Override
+    public int register(BoardVO board) {
+        return boardMapper.insert(board);
+    }
+
+    @Override
+    public int modify(BoardVO board) {
+        return boardMapper.update(board);
+    }
+
+    @Override
+    public int remove(Integer bno) {
+        return boardMapper.delete(bno);
+    }
+
+    @Override
+    public List<BoardVO> getBoardList() {
+        return boardMapper.selectList();
     }
     
 }
