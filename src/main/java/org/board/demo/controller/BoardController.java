@@ -1,8 +1,12 @@
 package org.board.demo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.board.demo.domain.BoardVO;
+import org.board.demo.domain.PageMaker;
+import org.board.demo.domain.PagingDTO;
 import org.board.demo.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,17 +34,25 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping(value = "/{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BoardVO> read(@PathVariable("bno") Integer bno) {
+    public BoardVO read(@PathVariable("bno") Integer bno) {
         log.info("read one...............................");
 
-        return new ResponseEntity<>(boardService.read(bno), HttpStatus.OK);
+        return boardService.read(bno);
     }
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<BoardVO>> getBoardList() {
+    public ResponseEntity<HashMap<String, Object>> getBoardList(PagingDTO dto) {
         log.info("get board list...............................");
+        log.info("pageDTO - " + dto);
 
-        return new ResponseEntity<>(boardService.getBoardList(), HttpStatus.OK);
+        PageMaker pg = new PageMaker(boardService.getTotal(), dto);
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("board", boardService.getBoardList(dto));
+        map.put("pg", pg);
+
+        return new ResponseEntity<HashMap<String, Object>>(map, HttpStatus.OK);
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)

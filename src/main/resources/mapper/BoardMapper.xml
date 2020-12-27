@@ -11,6 +11,12 @@
 
     <select id="selectList" resultType="org.board.demo.domain.BoardVO">
         select * from board
+        order by bno desc
+        limit #{skip}, #{amount}
+    </select>
+
+    <select id="getTotal" resultType="int">
+        select count(*) from board
     </select>
 
     <update id="update">

@@ -3,6 +3,7 @@ package org.board.demo.service;
 import java.util.List;
 
 import org.board.demo.domain.BoardVO;
+import org.board.demo.domain.PagingDTO;
 import org.board.demo.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardVO> getBoardList() {
-        return boardMapper.selectList();
+    public List<BoardVO> getBoardList(PagingDTO dto) {
+        return boardMapper.selectList(dto);
+    }
+
+    @Override
+    public int getTotal() {
+        return boardMapper.getTotal();
     }
     
 }
