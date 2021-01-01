@@ -8,7 +8,7 @@ import org.board.demo.domain.PagingDTO;
 public interface BoardMapper {
     public BoardVO select(Integer bno);
     public List<BoardVO> selectList(PagingDTO dto);
-    public int getTotal();
+    public int getTotal(PagingDTO dto);
     public int update(BoardVO board);
     public int delete(Integer bno);
     public int insert(BoardVO board);

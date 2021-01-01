@@ -45,7 +45,7 @@ public class BoardController {
         log.info("get board list...............................");
         log.info("pageDTO - " + dto);
 
-        PageMaker pg = new PageMaker(boardService.getTotal(), dto);
+        PageMaker pg = new PageMaker(boardService.getTotal(dto), dto);
 
         HashMap<String, Object> map = new HashMap<>();
 
@@ -65,6 +65,7 @@ public class BoardController {
     @PutMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Integer> modify(BoardVO board) {
         log.info("modify...............................");
+        log.info("BoardVO - " + board);
 
         return new ResponseEntity<>(boardService.modify(board), HttpStatus.OK);
     }

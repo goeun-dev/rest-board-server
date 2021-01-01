@@ -11,6 +11,8 @@ public class PagingDTO {
 
     private int pageNum;
     private int amount;
+    private String type;
+    private String keyword;
 
     public PagingDTO() {
         this(1, 6);
@@ -23,6 +25,14 @@ public class PagingDTO {
 
     public int getSkip() {
         return (this.pageNum - 1) * this.amount;
+    }
+
+    public String[] getTypes() {
+        if (type == null || type.trim().length() == 0) {
+            return null;
+        }
+
+        return type.split("");
     }
 
 }

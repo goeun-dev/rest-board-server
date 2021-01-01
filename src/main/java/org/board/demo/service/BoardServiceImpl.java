@@ -42,8 +42,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public int getTotal() {
-        return boardMapper.getTotal();
+    public int getTotal(PagingDTO dto) {
+        return boardMapper.getTotal(dto);
     }
     
 }

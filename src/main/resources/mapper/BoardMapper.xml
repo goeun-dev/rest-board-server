@@ -11,12 +11,33 @@
 
     <select id="selectList" resultType="org.board.demo.domain.BoardVO">
         select * from board
+        where bno > 0
+        <include refid="search"></include>
         order by bno desc
         limit #{skip}, #{amount}
     </select>
 
+    <sql id="search">
+        <if test="keyword != null and types != null">
+            <foreach collection="types" item="item" open="and ("
+                close=")" separator="OR">
+                <if test="item eq 'T'.toString()">
+					title like concat("%", #{keyword}, "%")
+				</if>
+				<if test="item eq 'C'.toString()">
+					content like concat("%", #{keyword}, "%")
+				</if>
+				<if test="item eq 'W'.toString()">
+					writer like concat("%", #{keyword}, "%")
+				</if>
+            </foreach>
+        </if>
+    </sql>
+
     <select id="getTotal" resultType="int">
         select count(*) from board
+        where bno > 0
+        <include refid="search"></include>
     </select>
 
     <update id="update">

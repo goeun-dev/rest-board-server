@@ -11,5 +11,5 @@ public interface BoardService {
     public int modify(BoardVO board);     // Update
     public int remove(Integer bno);     // Delete
     public List<BoardVO> getBoardList(PagingDTO dto);  // List
-    public int getTotal();
+    public int getTotal(PagingDTO dto);
 }
